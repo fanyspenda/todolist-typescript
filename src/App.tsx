@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Input from "./components/input";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface AppState {
+  value: string;
 }
 
-export default App;
+export default class App extends React.Component<{}, AppState> {
+  state: AppState = {
+    value: ""
+  };
+
+  tambahkan = (a: number, b: number): number => {
+    return a + b;
+  };
+
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      value: event.target.value
+    });
+
+    this.tambahkan(5, 5);
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Input value={this.state.value} onChange={this.handleInputChange} />
+      </div>
+    );
+  }
+}
